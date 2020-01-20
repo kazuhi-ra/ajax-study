@@ -1,12 +1,12 @@
-const main = () => {
-  const userId = document.getElementById('userId').value;
-  console.log(userId);
-  fetchUserInfo(userId)
-    .then(userInfo => createView(userInfo))
-    .then(view => displayView(view))
-    .catch(error => {
-      console.error('エラーが発生しました', error);
-    });
+const main = async() => {
+  try {
+    const userId = getUserId();
+    const userInfo = await fetchUserInfo(userId);
+    const view = createView(userInfo);
+    displayView(view);
+  } catch (error) {
+    console.error(`エラーが発生しました (${error})`);
+  }
 };
 
 function fetchUserInfo(userId) {
